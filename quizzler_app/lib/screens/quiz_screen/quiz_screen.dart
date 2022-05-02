@@ -20,12 +20,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
     super.initState();
   }
 
+  int questionNumber = 1;
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     Question currentQuestion = widget.questions[currentIndex];
     List<dynamic> allTheAnswers = QuizHelper.getAllTheAnswers(currentQuestion);
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -39,7 +39,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   vertical: 20,
                 ),
                 child: Text(
-                  currentQuestion.question,
+                  "$questionNumber. ${currentQuestion.question}",
                   style: GoogleFonts.poppins(
                     color: const Color(0xFF313131),
                     fontWeight: FontWeight.bold,
@@ -52,6 +52,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
               return Expanded(
                 child: AnswerBtn(
                   answerText: answer,
+                  onTap: () {
+                    setState(() {
+                      currentIndex++;
+                      questionNumber++;
+                    });
+                  },
                 ),
               );
             }).toList(),
