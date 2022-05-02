@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quizzler_app/screens/question_screen/question.dart';
-import 'package:quizzler_app/services/network.dart';
+import 'package:quizzler_app/services/question_brain.dart';
+
+import '../../../models/questions.dart';
+import '../../quiz_screen/quiz_screen.dart';
 
 class RowQuizContainers extends StatelessWidget {
   const RowQuizContainers({
@@ -46,14 +48,13 @@ class QuizContainer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
-          final dynamic questionsData = await QuestionBrain.fetchQuestions();
+          final List<Question> questions = await QuizBrain.createQuestions();
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) {
                 return QuestionScreen(
-                  questions: questionsData,
-                  // questions: questions,
+                  questions: questions,
                 );
               },
             ),
