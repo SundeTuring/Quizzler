@@ -1,11 +1,19 @@
 import 'dart:convert';
 
+// ignore: unused_import
+import 'package:flutter/cupertino.dart';
 import "package:http/http.dart" as http;
 
 import '../models/questions.dart';
 
 class QuizBrain {
-  static Future<List<Question>> createQuestions(category) async {
+  final int category;
+
+  QuizBrain({
+    required this.category,
+  });
+
+  Future<List<Question>> createQuestions() async {
     final data = await _fetchQuestions(category);
     List<Question> questions = [];
     for (Map question in data) {
@@ -31,8 +39,10 @@ class QuizBrain {
 class QuizHelper {
   static List<dynamic> getAllTheAnswers(currentQuestion) {
     List<dynamic> allTheAnswers = currentQuestion.incorrectAnswers;
-    allTheAnswers.add(currentQuestion.correctAnswer);
-    allTheAnswers.shuffle();
+    if (allTheAnswers.contains(currentQuestion.correctAnswer) == false) {
+      allTheAnswers.add(currentQuestion.correctAnswer);
+      allTheAnswers.shuffle();
+    }
 
     return allTheAnswers;
   }

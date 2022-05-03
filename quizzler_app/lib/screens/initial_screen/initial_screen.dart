@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quizzler_app/screens/home_screen/home.dart';
 
-
 class InitialScreen extends StatelessWidget {
   const InitialScreen({
     Key? key,
@@ -54,8 +53,8 @@ class InitialScreen extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   primary: const Color(0xFFFFC04A),
                   onPrimary: const Color(0xFF313131),
-                  shape: BeveledRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
                   ),
                 ),
               ),

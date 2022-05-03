@@ -17,6 +17,7 @@ dependencies:
   http: ^0.13.4
   bootstrap_icons: ^1.7.2
   html_unescape: ^2.0.0
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
