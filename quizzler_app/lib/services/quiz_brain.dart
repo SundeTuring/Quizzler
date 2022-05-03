@@ -6,10 +6,10 @@ import "package:http/http.dart" as http;
 
 import '../models/questions.dart';
 
-class QuizBrain {
+class QuestionsCreator {
   final int category;
 
-  QuizBrain({
+  QuestionsCreator({
     required this.category,
   });
 

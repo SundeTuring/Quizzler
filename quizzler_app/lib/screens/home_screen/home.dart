@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../services/question_brain.dart';
+import '../../services/quiz_brain.dart';
 import 'components/row_quiz_containers.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
                 final int secondContainerValue =
                     quizRow["second_container"]["value"];
                 return Expanded(
-                  child: RowQuizContainers(
+                  child: RowOfQuizCategories(
                     firstContainerText: firstContainerText,
                     firstContainerValue: firstContainerValue,
                     secondContainerText: secondContainerText,

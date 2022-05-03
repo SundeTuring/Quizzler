@@ -4,7 +4,7 @@ import 'package:html_unescape/html_unescape.dart';
 import 'package:flutter/material.dart';
 import 'package:quizzler_app/screens/quiz_screen/components/answer_btn.dart';
 import 'package:quizzler_app/screens/quiz_screen/components/quiz_header.dart';
-import 'package:quizzler_app/services/question_brain.dart';
+import 'package:quizzler_app/services/quiz_brain.dart';
 
 import '../../models/questions.dart';
 import 'components/exit_alert.dart';
@@ -32,7 +32,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   }
 
   createQuestions() {
-    QuizBrain quizBrain = QuizBrain(category: widget.categoryNumber);
+    QuestionsCreator quizBrain = QuestionsCreator(category: widget.categoryNumber);
     return quizBrain.createQuestions();
   }
 

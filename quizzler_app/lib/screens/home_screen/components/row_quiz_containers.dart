@@ -3,8 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../quiz_screen/quiz_screen.dart';
 
-class RowQuizContainers extends StatelessWidget {
-  const RowQuizContainers({
+class RowOfQuizCategories extends StatelessWidget {
+  const RowOfQuizCategories({
     Key? key,
     required this.firstContainerText,
     required this.firstContainerValue,
@@ -22,13 +22,13 @@ class RowQuizContainers extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: QuizContainer(
+          child: CategoryContainer(
             text: firstContainerText,
             categoryNumber: firstContainerValue,
           ),
         ),
         Expanded(
-          child: QuizContainer(
+          child: CategoryContainer(
             text: secondContainerText,
             categoryNumber: secondContainerValue,
           ),
@@ -38,8 +38,8 @@ class RowQuizContainers extends StatelessWidget {
   }
 }
 
-class QuizContainer extends StatelessWidget {
-  const QuizContainer({
+class CategoryContainer extends StatelessWidget {
+  const CategoryContainer({
     Key? key,
     required this.categoryNumber,
     required this.text,
