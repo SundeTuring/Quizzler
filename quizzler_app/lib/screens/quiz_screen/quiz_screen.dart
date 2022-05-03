@@ -8,10 +8,9 @@ import 'package:quizzler_app/services/question_brain.dart';
 
 import '../../models/questions.dart';
 import 'components/result_widget.dart';
-//TODO: Dar feedback quando ele terminar
-//TODO: Dar feedback quando ele terminar sair
 
-//TODO: Quando o usuário clicar em um Container ele deve conseguir acessar o quiz correspondente a ela
+//TODO: Dar feedback quando ele tentar sair
+//TODO: Quando o usuário clicar em um Container ele deve conseguir acessar o quiz correspondente a ele
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({Key? key, required this.questions}) : super(key: key);
@@ -26,6 +25,24 @@ class _QuestionScreenState extends State<QuestionScreen> {
   @override
   void initState() {
     super.initState();
+  }
+
+  void _giveFeedback({dynamic answer, currentQuestion}) {
+    if (answer == currentQuestion.correctAnswer) {
+      feedbackCircles.add(
+        const FeedbackCircle(
+          color: Color(0xFF41D664),
+          icon: BootstrapIcons.check,
+        ),
+      );
+    } else {
+      feedbackCircles.add(
+        const FeedbackCircle(
+          color: Color(0xFFFF5978),
+          icon: BootstrapIcons.x,
+        ),
+      );
+    }
   }
 
   HtmlUnescape unescape = HtmlUnescape();
@@ -57,7 +74,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                             style: GoogleFonts.poppins(
                               color: const Color(0xFF313131),
                               fontWeight: FontWeight.bold,
-                              fontSize: 22,
+                              fontSize: 20,
                             ),
                           ),
                           Flexible(
@@ -81,23 +98,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                               () {
                                 currentIndex++;
                                 questionNumber++;
-                                {
-                                  if (answer == currentQuestion.correctAnswer) {
-                                    feedbackCircles.add(
-                                      const FeedbackCircle(
-                                        color: Color(0xFF41D664),
-                                        icon: BootstrapIcons.check,
-                                      ),
-                                    );
-                                  } else {
-                                    feedbackCircles.add(
-                                      const FeedbackCircle(
-                                        color: Color(0xFFFF5978),
-                                        icon: BootstrapIcons.x,
-                                      ),
-                                    );
-                                  }
-                                }
+                                _giveFeedback(answer: answer, currentQuestion: currentQuestion);
                               },
                             );
                           }

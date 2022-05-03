@@ -9,11 +9,15 @@ class RowQuizContainers extends StatelessWidget {
   const RowQuizContainers({
     Key? key,
     required this.firstContainerText,
+    required this.firstContainerValue,
     required this.secondContainerText,
+    required this.secondContainerCategoryNumber,
   }) : super(key: key);
 
   final String firstContainerText;
+  final int firstContainerValue;
   final String secondContainerText;
+  final int secondContainerCategoryNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +26,13 @@ class RowQuizContainers extends StatelessWidget {
         Expanded(
           child: QuizContainer(
             text: firstContainerText,
+            categoryNumber: firstContainerValue,
           ),
         ),
         Expanded(
           child: QuizContainer(
             text: secondContainerText,
+            categoryNumber: secondContainerCategoryNumber,
           ),
         ),
       ],
@@ -37,10 +43,12 @@ class RowQuizContainers extends StatelessWidget {
 class QuizContainer extends StatelessWidget {
   const QuizContainer({
     Key? key,
+    required this.categoryNumber,
     required this.text,
   }) : super(key: key);
 
   final String text;
+  final int categoryNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +56,7 @@ class QuizContainer extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
         onTap: () async {
-          final List<Question> questions = await QuizBrain.createQuestions();
+          final List<Question> questions = await QuizBrain.createQuestions(categoryNumber);
           Navigator.push(
             context,
             MaterialPageRoute(
