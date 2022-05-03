@@ -57,6 +57,7 @@ class InitialScreen extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     primary: const Color(0xFFFFC04A),
                     onPrimary: const Color(0xFF313131),
+                    elevation: 0,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20),
                     ),
