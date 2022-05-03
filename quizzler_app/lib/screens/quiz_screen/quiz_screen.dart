@@ -7,6 +7,7 @@ import 'package:quizzler_app/screens/quiz_screen/components/quiz_header.dart';
 import 'package:quizzler_app/services/question_brain.dart';
 
 import '../../models/questions.dart';
+import 'components/exit_alert.dart';
 import 'components/result_widget.dart';
 
 // ignore: must_be_immutable
@@ -82,40 +83,51 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   QuizHelper.getAllTheAnswers(currentQuestion);
 
               return currentIndex < questions.length - 1
-                  ? Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Expanded(
-                          flex: 2,
-                          child: QuizHeader(
-                            questionNumber: questionNumber,
-                            currentQuestion: currentQuestion,
-                            feedbackCircles: feedbackCircles,
-                          ),
-                        ),
-                        ...allTheAnswers.map((answer) {
-                          HtmlUnescape unescape = HtmlUnescape();
-                          return Expanded(
-                            child: AnswerBtn(
-                              answerText: unescape.convert(answer),
-                              onTap: () {
-                                if (currentIndex < questions.length - 1) {
-                                  setState(
-                                    () {
-                                      currentIndex++;
-                                      questionNumber++;
-                                      _giveFeedback(
-                                        answer: answer,
-                                        currentQuestion: currentQuestion,
-                                      );
-                                    },
-                                  );
-                                }
-                              },
+                  ? WillPopScope(
+                      onWillPop: () async {
+                        final value = await showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return const ExitAlert();
+                          },
+                        );
+                        return value == true;
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: QuizHeader(
+                              questionNumber: questionNumber,
+                              currentQuestion: currentQuestion,
+                              feedbackCircles: feedbackCircles,
                             ),
-                          );
-                        }).toList(),
-                      ],
+                          ),
+                          ...allTheAnswers.map((answer) {
+                            HtmlUnescape unescape = HtmlUnescape();
+                            return Expanded(
+                              child: AnswerBtn(
+                                answerText: unescape.convert(answer),
+                                onTap: () {
+                                  if (currentIndex < questions.length - 1) {
+                                    setState(
+                                      () {
+                                        currentIndex++;
+                                        questionNumber++;
+                                        _giveFeedback(
+                                          answer: answer,
+                                          currentQuestion: currentQuestion,
+                                        );
+                                      },
+                                    );
+                                  }
+                                },
+                              ),
+                            );
+                          }).toList(),
+                        ],
+                      ),
                     )
                   : ResultWidget(
                       numberOfCorrectAnswers: numberOfCorrectAnswers,

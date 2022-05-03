@@ -23,11 +23,15 @@ class AnswerBtn extends StatelessWidget {
         child: Container(
           width: double.infinity,
           child: Center(
-            child: Text(
-              answerText,
-              style: GoogleFonts.poppins(
-                color: Colors.black,
-                fontSize: 20,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Text(
+                answerText,
+                style: GoogleFonts.poppins(
+                  color: Colors.black,
+                  fontSize: 18,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
