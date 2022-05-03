@@ -10,7 +10,6 @@ import '../../models/questions.dart';
 import 'components/result_widget.dart';
 
 //TODO: Dar feedback quando ele tentar sair
-//TODO: Quando o usuário clicar em um Container ele deve conseguir acessar o quiz correspondente a ele
 
 class QuestionScreen extends StatefulWidget {
   const QuestionScreen({Key? key, required this.questions}) : super(key: key);
@@ -27,8 +26,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
     super.initState();
   }
 
+  void _resetQuiz() {
+    setState(() {
+      currentIndex = 0;
+      feedbackCircles = [];
+      questionNumber = 1;
+      numberOfCorrectAnswers = 0;
+    });
+  }
+
   void _giveFeedback({dynamic answer, currentQuestion}) {
     if (answer == currentQuestion.correctAnswer) {
+      numberOfCorrectAnswers++;
       feedbackCircles.add(
         const FeedbackCircle(
           color: Color(0xFF41D664),
@@ -48,6 +57,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
   HtmlUnescape unescape = HtmlUnescape();
   int questionNumber = 1;
   int currentIndex = 0;
+  int numberOfCorrectAnswers = 0;
   List<Widget> feedbackCircles = [];
   @override
   Widget build(BuildContext context) {
@@ -98,7 +108,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                               () {
                                 currentIndex++;
                                 questionNumber++;
-                                _giveFeedback(answer: answer, currentQuestion: currentQuestion);
+                                _giveFeedback(
+                                    answer: answer,
+                                    currentQuestion: currentQuestion);
                               },
                             );
                           }
@@ -108,7 +120,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   }).toList(),
                 ],
               )
-            : const ResultWidget(),
+            : ResultWidget(
+                numberOfCorrectAnswers: numberOfCorrectAnswers,
+                replayFunctionality: _resetQuiz,
+              ),
       ),
     );
   }

@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                     firstContainerText: firstContainerText,
                     firstContainerValue: firstContainerValue,
                     secondContainerText: secondContainerText,
-                    secondContainerCategoryNumber: secondContainerValue,
+                    secondContainerValue: secondContainerValue,
                   ),
                 );
               },

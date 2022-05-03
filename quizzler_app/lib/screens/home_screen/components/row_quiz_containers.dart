@@ -11,13 +11,13 @@ class RowQuizContainers extends StatelessWidget {
     required this.firstContainerText,
     required this.firstContainerValue,
     required this.secondContainerText,
-    required this.secondContainerCategoryNumber,
+    required this.secondContainerValue,
   }) : super(key: key);
 
   final String firstContainerText;
   final int firstContainerValue;
   final String secondContainerText;
-  final int secondContainerCategoryNumber;
+  final int secondContainerValue;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class RowQuizContainers extends StatelessWidget {
         Expanded(
           child: QuizContainer(
             text: secondContainerText,
-            categoryNumber: secondContainerCategoryNumber,
+            categoryNumber: secondContainerValue,
           ),
         ),
       ],
